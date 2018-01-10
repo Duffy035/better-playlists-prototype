@@ -3,14 +3,70 @@ import logo from './logo.svg';
 import './App.css';
 
 let deafultStyle = {
-  color: 'blue'
+  color: 'white'
 }
 
-class Aggregate extends Component{
+let fakeServerData = {
+  user: {
+    name: 'Carl',
+    playlists: [
+      {
+        name: 'My favorites',
+        songs: [
+          {name: 'Who was in my room last night?', duration: 1345},
+          {name: 'Jumping jack Flash', duration: 1234},
+          {name: 'Song 2', duration: 7000}
+        ]
+      },
+      {
+        name: 'Discover Weekly',
+        songs: [
+          {name: 'Le song', duration: 1413},
+          {name: 'Ballerino Fellerion', duration: 1213},
+          {name: 'In the Ghetto', duration: 1221}
+        ]
+      },
+      {
+        name: 'Partylista',
+        songs: [
+          {name: 'Robot Rock', duration: 1244},
+          {name: 'D.A.N.C.E', duration: 1315},
+          {name: 'Girls', duration: 1355}
+        ]
+      },
+      {
+        name: '80-talet',
+        songs: [
+          {name: 'Living on a prayer', duration: 123515},
+          {name: 'Mr Brownstone', duration: 13515},
+          {name: '99 Luftballons', duration: 13515}
+        ]
+      }, 
+    ]
+  }
+}
+
+class PlaylistCounter extends Component{
   render(){
     return (
       <div style={{...deafultStyle, width: '40%', display: 'inline-block'}}>
-        <h2>Number Text</h2>
+        <h2>{this.props.playlists.length} Playlists</h2>
+      </div>
+    )
+  }
+}
+
+class HoursCounter extends Component{
+  render(){
+    let allSongs = this.props.playlists.reduce((songs, eachPlaylist) => {
+      return songs.concat(eachPlaylist.songs)
+    }, [])
+    let totalDuration = allSongs.reduce((sum, eachSong) => {
+      return sum + eachSong.duration
+    }, 0)
+    return (
+      <div style={{...deafultStyle, width: '40%', display: 'inline-block'}}>
+        <h2>{Math.floor(totalDuration/60)} Hours</h2>
       </div>
     )
   }
@@ -42,17 +98,33 @@ class Playlist extends Component{
 }
 
 class App extends Component {
+  constructor(){
+    super();
+    this.state = {serverData: {}}
+  }
+  componentDidMount(){
+    setTimeout(() => {
+        this.setState({serverData: fakeServerData}) 
+    }, 2000);
+  }
   render() {
     return (
       <div className="App">
-      <h1 style={{...deafultStyle, 'font-size': '54px'}}>Title</h1>
-        <Aggregate/>
-        <Aggregate/>
-        <Filter/>
-        <Playlist/>
-        <Playlist/>
-        <Playlist/>
-        <Playlist/>
+      
+        {this.state.serverData.user ?
+        <div>
+          <h1 style={{...deafultStyle, 'font-size': '54px'}}>
+            {this.state.serverData.user.name}'s Playlists
+          </h1>
+            <PlaylistCounter playlists= {this.state.serverData.user.playlists}/>
+            <HoursCounter playlists= {this.state.serverData.user.playlists}/>
+            <Filter/>
+            <Playlist/>
+            <Playlist/>
+            <Playlist/>
+            <Playlist/>
+        </div> : <h1 style={deafultStyle}>Loading...</h1>
+        }
       </div>
     );
   }
