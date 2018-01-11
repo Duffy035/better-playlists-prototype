@@ -125,6 +125,7 @@ class App extends Component {
             <HoursCounter playlists={this.state.serverData.user.playlists}/>
             <Filter/>
 <<<<<<< HEAD
+<<<<<<< HEAD
            {/*{playlistElement}*/}
            )}
            {this.state.serverData.user.playlists.filter(playlist =>
@@ -143,10 +144,15 @@ class App extends Component {
             
             )}  */}
 =======
+=======
+>>>>>>> parent of 58dbbfa... dynamic listing of fake server playlist data
             <Playlist/>
             <Playlist/>
             <Playlist/>
             <Playlist/>
+<<<<<<< HEAD
+>>>>>>> parent of 58dbbfa... dynamic listing of fake server playlist data
+=======
 >>>>>>> parent of 58dbbfa... dynamic listing of fake server playlist data
         </div> : <h1 style={deafultStyle}>Loading...</h1>
         }
