@@ -88,10 +88,11 @@ class Playlist extends Component{
     return (
       <div style={{...deafultStyle, display: 'inline-block', width: '25%'}}>
         <img/>
-        <h3>Playlist Name</h3>
-        <ul><li>Song 1</li></ul>
-        <ul><li>Song 2</li></ul>
-        <ul><li>Song 3</li></ul>
+        <h3>{playlist.name}</h3>
+        <ul> 
+          {playlist.songs.map(songs => 
+           <li>{song.name}</li>)}
+        </ul>
       </div>
     )
   }
@@ -124,8 +125,6 @@ class App extends Component {
             <PlaylistCounter playlists={this.state.serverData.user.playlists}/>
             <HoursCounter playlists={this.state.serverData.user.playlists}/>
             <Filter/>
-<<<<<<< HEAD
-<<<<<<< HEAD
            {/*{playlistElement}*/}
            )}
            {this.state.serverData.user.playlists.filter(playlist =>
@@ -134,26 +133,6 @@ class App extends Component {
         ).map(playlist => 
         <Playlist playlist={playlist} /> 
         )}
-
-          {/* )}
-            {this.state.serverData.user.playlists.filter(playlist =>
-              playlist.name.toLowerCase().includes(
-                this.state.filterString.toLowerCase())
-            ).map(playlist =>
-            <Playlist playlist={playlist} />
-            
-            )}  */}
-=======
-=======
->>>>>>> parent of 58dbbfa... dynamic listing of fake server playlist data
-            <Playlist/>
-            <Playlist/>
-            <Playlist/>
-            <Playlist/>
-<<<<<<< HEAD
->>>>>>> parent of 58dbbfa... dynamic listing of fake server playlist data
-=======
->>>>>>> parent of 58dbbfa... dynamic listing of fake server playlist data
         </div> : <h1 style={deafultStyle}>Loading...</h1>
         }
       </div>
