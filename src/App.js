@@ -85,15 +85,13 @@ class Filter extends Component{
 
 class Playlist extends Component{
   render() {
-    let playlist = this.props.playlist
     return (
       <div style={{...deafultStyle, display: 'inline-block', width: '25%'}}>
         <img/>
-        <h3>{playlist.name}</h3>
-        <ul>
-          {playlist.songs.map(song =>
-          <li>{song.name}</li>)}
-        </ul>
+        <h3>Playlist Name</h3>
+        <ul><li>Song 1</li></ul>
+        <ul><li>Song 2</li></ul>
+        <ul><li>Song 3</li></ul>
       </div>
     )
   }
@@ -116,13 +114,6 @@ class App extends Component {
     }, 2000);
   }
   render() {
-
-/*     let playlistElement = []
-    if (this.state.serverData.user) {
-      this.state.serverData.user.playlists.forEach(playlist =>
-      playlistElement.push(<Playlist playlist={playlist} />)
-    )
-  } */
     return (
       <div className="App">
         {this.state.serverData.user ?
@@ -133,6 +124,7 @@ class App extends Component {
             <PlaylistCounter playlists={this.state.serverData.user.playlists}/>
             <HoursCounter playlists={this.state.serverData.user.playlists}/>
             <Filter/>
+<<<<<<< HEAD
            {/*{playlistElement}*/}
            )}
            {this.state.serverData.user.playlists.filter(playlist =>
@@ -150,6 +142,12 @@ class App extends Component {
             <Playlist playlist={playlist} />
             
             )}  */}
+=======
+            <Playlist/>
+            <Playlist/>
+            <Playlist/>
+            <Playlist/>
+>>>>>>> parent of 58dbbfa... dynamic listing of fake server playlist data
         </div> : <h1 style={deafultStyle}>Loading...</h1>
         }
       </div>
