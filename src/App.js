@@ -86,14 +86,13 @@ class Filter extends Component{
 
 class Playlist extends Component{
   render() {
-    let playlist = this.props.playlist
     return (
       <div style={{...deafultStyle, display: 'inline-block', width: '25%'}}>
         <img/>
         <h3>{playlist.name}</h3>
-        <ul>
-          {playlist.songs.map(song =>
-          <li>{song.name}</li>)}
+        <ul> 
+          {playlist.songs.map(songs => 
+           <li>{song.name}</li>)}
         </ul>
       </div>
     )
@@ -101,7 +100,7 @@ class Playlist extends Component{
 }
 
 class App extends Component {
-  constructor(){
+  constructor() {
     super();
     this.state = {
       serverData: {},
@@ -114,16 +113,8 @@ class App extends Component {
     }, 1000);
   }
   render() {
-
-/*     let playlistElement = []
-    if (this.state.serverData.user) {
-      this.state.serverData.user.playlists.forEach(playlist =>
-      playlistElement.push(<Playlist playlist={playlist} />)
-    )
-  } */
     return (
       <div className="App">
-      
         {this.state.serverData.user ?
         <div>
           <h1 style={{...deafultStyle, 'fontSize': '54px'}}>
