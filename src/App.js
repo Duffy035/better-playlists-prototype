@@ -86,13 +86,14 @@ class Filter extends Component{
 
 class Playlist extends Component{
   render() {
+    let playlist = this.props.playlist
     return (
       <div style={{...deafultStyle, display: 'inline-block', width: '25%'}}>
         <img/>
         <h3>{playlist.name}</h3>
         <ul> 
           {playlist.songs.map(songs => 
-           <li>{song.name}</li>)}
+           <li>{songs.name}</li>)}
         </ul>
       </div>
     )
