@@ -75,9 +75,10 @@ class HoursCounter extends Component{
 class Filter extends Component{
   render() {
     return (
-      <div style={{...deafultStyle}}>
+      <div style={deafultStyle}>
         <img/>
-        <input type="text"/>
+        <input type="text" onKeyUp={event => 
+          this.props.onTextChange(event.target.value)}/>
       </div>
     )
   } 
@@ -102,12 +103,15 @@ class Playlist extends Component{
 class App extends Component {
   constructor(){
     super();
-    this.state = {serverData: {}}
+    this.state = {
+      serverData: {},
+      filterString: ''
+     }
   }
   componentDidMount(){
     setTimeout(() => {
         this.setState({serverData: fakeServerData}) 
-    }, 2000);
+    }, 1000);
   }
   render() {
 
@@ -122,14 +126,19 @@ class App extends Component {
       
         {this.state.serverData.user ?
         <div>
-          <h1 style={{...deafultStyle, 'font-size': '54px'}}>
+          <h1 style={{...deafultStyle, 'fontSize': '54px'}}>
             {this.state.serverData.user.name}'s Playlists
           </h1>
             <PlaylistCounter playlists= {this.state.serverData.user.playlists}/>
             <HoursCounter playlists= {this.state.serverData.user.playlists}/>
-            <Filter/>
+            <Filter onTextChange={text => 
+              this.setState({filterString: text})
+            }/>
            {/* {playlistElement} */}
-            {this.state.serverData.user.playlists.map(playlist =>
+            {this.state.serverData.user.playlists.filter(playlist =>
+              playlist.name.toLowerCase().includes(
+                this.state.filterString.toLowerCase())
+            ).map(playlist =>
             <Playlist playlist={playlist}/>
             )}
         </div> : <h1 style={deafultStyle}>Loading...</h1>
